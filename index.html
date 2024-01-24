@@ -1,190 +1,725 @@
-<!DOCTYPE html>
+<!Doctype html>
 <html lang="pt-PT">
 
 <head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <link media="all" href="css/style.css" rel="stylesheet">
+   <script type="text/javascript" src="js/jquery.js"></script>
+   <title>Vagner Bom Jesus</title>
+  
+ 
+   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+   <script>
+       emailjs.init("user_your_emailjs_user_id");
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="https://github.com/vagnerbomjesus.png">
-    <link rel="icon" type="image/x-icon" href="https://github.com/vagnerbomjesus.png">
+       function enviarMensagem() {
+           var nome = document.getElementById("your-name").value;
+           var email = document.getElementById("your-email").value;
+           var mensagem = document.getElementById("your-message").value;
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page - Vagner Bom Jesus</title>
+           emailjs.send("service_dw5arkg", "template_your_emailjs_template_id", {
+               nome: nome,
+               email: email,
+               mensagem: mensagem
+           }).then(
+               function(response) {
+                   console.log("E-mail enviado com sucesso", response);
+                   exibirMensagemUsuario("success", "Mensagem enviada com sucesso!");
+               },
+               function(error) {
+                   console.log("Erro ao enviar o e-mail", error);
+                   exibirMensagemUsuario("error", "Erro ao enviar a mensagem. Tente novamente mais tarde.");
+               }
+           );
+       }
 
-    <link rel="stylesheet" href="./css/styles.css">
+       function exibirMensagemUsuario(tipo, mensagem) {
+           var mensagemElement = document.createElement("div");
+           mensagemElement.className = tipo === "success" ? "success-message" : "error-message";
+           mensagemElement.textContent = mensagem;
 
+           // Adicione a mensagem à interface do usuário (pode ser uma div específica ou body, dependendo de onde deseja exibir)
+           document.body.appendChild(mensagemElement);
+
+           // Remova a mensagem após alguns segundos (opcional)
+           setTimeout(function() {
+               document.body.removeChild(mensagemElement);
+           }, 5000); // Remover após 5 segundos (ajuste conforme necessário)
+       }
+   </script>
 </head>
 
-<body> 
-    <header>
-        <div>
-            <img src="https://github.com/vagnerbomjesus.png" alt="Foto de Vagner Bom Jesus" />
-        </div>
-    </header>
-
-    <main>
-
-        <section>
-            <div>
-                <h2>Meus Projetos</h2>
-                <p>Os Projetos em que ando a desenvolver!</p>
-                <ul class="games-list">
-
-
-                    <li>
-                        <a target="_blank" href="http://mcm-api-parking.herokuapp.com/swagger/">
-                            <img src="https://spng.subpng.com/20190729/wgx/kisspng-smiley-green-text-messaging-meter-professional-odoo-rest-api-odoo-apps-5d3f7a46db7da5.509542591564441158899.jpg"  alt="">
-                        </a>
-                    </li>
-
-                    <li>
-                        <a target="_blank" href="http://mcm-api-parking.herokuapp.com/graphql">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb65rlZg8kOm6e_l9zZ7nBeTy0RLjdckA3el0bbyEUSAVRlVo_pgIQhGQ5YJm1LuiZJio&usqp=CAU" alt="">
-                        </a>
-                    </li>
-
-                    <li>
-                        <a target="_blank" href="https://vagnerbomjesus.github.io/carlosanto_photography/page.html">
-                            <img src="https://vagnerbomjesus.github.io/carlosanto_photography/img/810_n.jpg" alt="">
-                        </a>
-                    </li>
-
-                    <li>
-                        <a target="_blank" href="https://vagnerbomjesus.github.io/DS_AGENCY/">
-                            <img src="https://vagnerbomjesus.github.io/DS_AGENCY/assets/img/galeria/logo1%20(2).jpg" alt="">
-                        </a>
-                    </li>
-
-                    <li>
-                        <a target="_blank" href="https://vagnerbomjesus.github.io/WorkshopII/">
-                            <img src="https://vagnerbomjesus.github.io/WorkshopII/logo.png"  height="88" alt="">
-                        </a>
-                    </li>
-
-                    <li>
-                        <a target="_blank" href="https://vagnerbomjesus.github.io/mySiteProDark/">
-                            <img src="https://vagnerbomjesus.github.io/mySiteProDark/images/775744_n.jpg"   alt="">
-                        </a>
-                    </li>
-
-                    <li>
-                        <a target="_blank" href="https://vagnerbomjesus.github.io/maratona-discover-1/">
-                            <img height="88" src="https://user-images.githubusercontent.com/48354097/108573731-48517880-730d-11eb-83e2-0325f41158ea.png" alt="">
-                        </a>
-                    </li>
-                    
-                     <li>
-                        <a target="_blank" href="/devops-bastion">
-                            <img height="88" src="data:image/png;base64,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" alt="">
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a target="_blank" href="https://vagnerbomjesus.github.io/EditorTexto/">
-                            <img height="88" src="https://thumbs.dreamstime.com/b/text-editor-isolated-icon-simple-element-illustration-technology-concept-icons-editable-logo-sign-symbol-design-white-142287610.jpg" alt="">
-                        </a>
-                    </li>
-<li>
-                        <a target="_blank" href="https://vagnerbomjesus.github.io/maratona-discover-3/">
-                            <img height="88" src="https://user-images.githubusercontent.com/48354097/213160920-764a46c3-906c-4068-a187-1e508e3e0550.svg" alt="">
-                        </a>
-                    </li>
-                </ul>
+<body
+   class="home page-template page-template-template-layout-builder page-template-template-layout-builder-php page page-id-17">
+   <div class="page page_wrap theme-style-classic">
+      <div class="preloader">
+         <div class="centrize full-width">
+            <div class="vertical-center">
+               <div class="spinner simple-circle"></div>
             </div>
-        </section>
+         </div>
+      </div>
+      <div class="background gradient">
+         <ul class="bg-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+         </ul>
+      </div>
+      <div class="container opened" data-animation-in="fadeInLeft" data-animation-out="fadeOutLeft">
+         <header class="header">
+            <div class="profile">
+               <div class="image">
+                  <a
+                     href="https://github.com/vagnerbomjesus.png">
+                     <noscript><img
+                           src="https://github.com/vagnerbomjesus.png"
+                           alt="Vagner Bom Jesus"></noscript>
+                     <img class="lazyload"
+                        src="https://github.com/vagnerbomjesus.png">
+               </div>
+               <div class="title">Vagner Bom Jesus</div>
+               <div class="subtitle subtitle-typed">
+                  <div class="typing-title">
 
-        <!--<section>
-                <div>
-                    <h2> </h2>
-                    <p> </p>
-
-                    <ul class="channel-list">
-                        <li>
-                            <a 
-                            target="_blank"
-                            href="">
-                                <img src="" alt=" ">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </section>-->
-
-        <section>
-            <div>
-                <h2>Minhas Redes</h2>
-                <p>Se conecte comigo agora mesmo!</p>
-
-                <ul class="social-list">
-                    <li>
-                        <a target="_blank" href="https://www.medium.com/@vagnerbomjesus">
-                            <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="33" height="32"
-                                fill="currentColor" class="bi bi-medium" viewBox="0 0 16 16">
-                                <path
-                                    d="M9.025 8c0 2.485-2.02 4.5-4.513 4.5A4.506 4.506 0 0 1 0 8c0-2.486 2.02-4.5 4.512-4.5A4.506 4.506 0 0 1 9.025 8zm4.95 0c0 2.34-1.01 4.236-2.256 4.236-1.246 0-2.256-1.897-2.256-4.236 0-2.34 1.01-4.236 2.256-4.236 1.246 0 2.256 1.897 2.256 4.236zM16 8c0 2.096-.355 3.795-.794 3.795-.438 0-.793-1.7-.793-3.795 0-2.096.355-3.795.794-3.795.438 0 .793 1.699.793 3.795z"
-                                    fill="white"></path>
-                            </svg>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a target="_blank" href="https://github.com/vagnerbomjesus">
-                            <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="27" height="30"
-                                fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
-                                <path
-                                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-                                    fill="white"></path>
-                            </svg>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a target="_blank" href="https://www.linkedin.com/in/vagnerbomjesus/">
-                            <svg style="color: blue" xmlns="http://www.w3.org/2000/svg" width="33" height="32"
-                                viewBox="0 0 448 512">
-                                <path
-                                    d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
-                                    fill="blue"></path>
-                            </svg>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a target="_blank" href="https://www.instagram.com/_vagnerbj">
-                            <svg width="33" height="32" viewBox="0 0 32 32" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M16 21C18.7614 21 21 18.7614 21 16C21 13.2386 18.7614 11 16 11C13.2386 11 11 13.2386 11 16C11 18.7614 13.2386 21 16 21Z"
-                                    stroke="#FA41FE" stroke-width="2" stroke-miterlimit="10" />
-                                <path
-                                    d="M21.5 4.5H10.5C7.18629 4.5 4.5 7.18629 4.5 10.5V21.5C4.5 24.8137 7.18629 27.5 10.5 27.5H21.5C24.8137 27.5 27.5 24.8137 27.5 21.5V10.5C27.5 7.18629 24.8137 4.5 21.5 4.5Z"
-                                    stroke="#FA41FE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                <path
-                                    d="M22.5 11C23.3284 11 24 10.3284 24 9.5C24 8.67157 23.3284 8 22.5 8C21.6716 8 21 8.67157 21 9.5C21 10.3284 21.6716 11 22.5 11Z"
-                                    fill="#FA41FE" />
-                            </svg>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a target="_blank" href="https://www.youtube.com/channel/UCcv7yWFP9pW1SDdVvO8G3ag">
-                            <svg width="33" height="32" viewBox="0 0 32 32" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 16L14 12V20L20 16Z" stroke="#F40000" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                                <path
-                                    d="M3 16C3 19.725 3.3875 21.9 3.675 23.025C3.75427 23.3302 3.90418 23.6126 4.11262 23.8493C4.32106 24.0859 4.58221 24.2703 4.875 24.3875C9.0625 25.9875 16 25.95 16 25.95C16 25.95 22.9375 25.9875 27.125 24.3875C27.4178 24.2703 27.6789 24.0859 27.8874 23.8493C28.0958 23.6126 28.2457 23.3302 28.325 23.025C28.6125 21.9 29 19.725 29 16C29 12.275 28.6125 10.1 28.325 8.975C28.2457 8.66975 28.0958 8.38741 27.8874 8.15074C27.6789 7.91407 27.4178 7.7297 27.125 7.6125C22.9375 6.0125 16 6.05 16 6.05C16 6.05 9.0625 6.0125 4.875 7.6125C4.58221 7.7297 4.32106 7.91407 4.11262 8.15074C3.90418 8.38741 3.75427 8.66975 3.675 8.975C3.3875 10.1 3 12.275 3 16Z"
-                                    stroke="#F40000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
+                     <p>Desenvolvedor</p>
+                     <p>Eterno aprendiz</p>
+                     <p>Aluno</p>
+                     <p>Solucionador de problema</p>
+                     <p></p>
+                  </div>
+               </div>
             </div>
-        </section>
+            <div class="top-menu top-menu-onepage">
+               <div class="menu-main-menu-container">
+                  <ul id="menu-main-menu" class="menu">
+                     <li data-id="menu-item-111"
+                        class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-17 current_page_item">
+                        <a href class="one-page-menu-item"><span class="icon ion-ios-person"></span>Sobre</a></li>
+                     <li data-id="menu-item-110" class=" menu-item menu-item-type-post_type menu-item-object-page"><a
+                           href="#resume" class="one-page-menu-item"><span
+                              class="icon ion-android-list"></span>Currículo</a></li>
+                     <li data-id="menu-item-109" class=" menu-item menu-item-type-post_type menu-item-object-page"><a
+                           href="#works" class="one-page-menu-item"><span
+                              class="icon ion-paintbrush"></span>Trabalho</a></li>
+                     <li data-id="menu-item-108" class=" menu-item menu-item-type-post_type menu-item-object-page"><a
+                           href="#contacts" class="one-page-menu-item"><span class="icon ion-at"></span>Contato</a></li>
+                  </ul>
+               </div>
+            </div>
+         </header>
+         <div class="card-started" id="home-card">
+            <div class="profile ">
+               <div class="profile-content">
+                  <div class="lazyload slide"
+                     data-bg="https://github.com/vagnerbomjesus.png">
+                  </div>
+                  <div class="image">
+                     <a
+                        href="https://github.com/vagnerbomjesus.png">
+                        <noscript><img
+                              src="https://github.com/vagnerbomjesus.png"
+                              alt="Vagner Bom Jesus"></noscript>
+                        <img class="lazyload"
+                           src="./images/bjtech.png">
+                     </a>
+                  </div>
+                  <div class="title">Vagner Bom Jesus</div>
+                  <div class="subtitle subtitle-typed">
+                     <div class="typing-title">
+                        <p>Desenvolvedor</p>
+                        <p>Eterno aprendiz</p>
+                        <p>Aluno</p>
+                        <p>Solucionador de problema</p>
+                     </div>
+                  </div>
+                  <div class="social"> <a target="_blank" href="#"> <span class="fab fab fa-twitter"></span> </a> <a
+                        target="_blank" href="https://github.com/VagnerBomJesus"> <span
+                           class="fab fab fa-github"></span> </a> <a target="_blank" href="#"> <span
+                           class="fab fab fa-spotify"></span></div>
+               </div>
+               <div class="lnks">
+                  <a href="#" class="lnk" target="blank"> <span class="text">Ver Currículo</span> <span
+                        class="ion ion-archive"></span>
 
-    </main>
+                     <a href="#contacts" class="lnk"> <span class="text">Contata Me</span> <span
+                           class="ion ion-android-send"></span> </a>
+               </div>
+            </div>
+         </div>
+
+         <!------------------------------------------>
+         <div class="s_overlay"></div>
+
+         <div class="card-inner animated active" id="card-home">
+            <div class="card-wrap">
+               <div class="content about">
+                  <div class="title">Sobre mim</div>
+                  <div class="row">
+                     <div class="col col-d-6 col-t-12 col-m-12 border-line-v">
+                        <div class="text-box">
+                           <p><strong>Olá! Eu sou Vagner Bom Jesus.</strong>
+                              <br>
+                              Um entusiasta da tecnologia e estudante de engenharia informática, com uma paixão pela programação e interesse em segurança da informação moldam minha jornada acadêmica.<br>Estou sempre atualizado com as últimas tendências, buscando aprender e aplicar novas tecnologias, comprometido com o aprendizado contínuo, estou pronto para enfrentar desafios e contribuir para o avanço tecnológico.<br><br> Vamos construir o futuro juntos!
+                           </p>
+                        </div>
+                     </div>
+                     <div class="col col-d-6 col-t-12 col-m-12 border-line-v">
+                        <div class="info-list">
+                           <ul class="sua-lista">
+                              <li>
+                                 <strong>Nacionalidade:</strong>São Tomé e Príncipe
+                                 
+                              </li>
+                              <li>
+                                 
+                              </li>
+                              <li></li>
+                          </ul>
+                           <ul>
+                              <li>
+                                
+                        <strong>Residência:</strong>Guarda, Portugal
+                              <li></li>
+                              
+                              
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="clear"></div>
+                  </div>
+               </div>
+               <div class="content fuct">
+                  <div class="title">Passatempos</div>
+                  <div class="row fuct-items">
+                     <div class="col col-d-3 col-t-3 col-m-6 border-line-v">
+                        <div class="fuct-item">
+                           <div class="icon"><span class="fa fa-music"></span></div>
+                           <div class="name">Música</div>
+                        </div>
+                     </div>
+
+                     <div class="col col-d-3 col-t-3 col-m-6 border-line-v">
+                        <div class="fuct-item">
+                           <div class="icon"><span class="fas fa-futbol"></span>
+
+                           </div>
+                           <div class="name">Futebol</div>
+                        </div>
+                     </div>
+                     <div class="col col-d-3 col-t-3 col-m-6 border-line-v">
+                        <div class="fuct-item">
+                           <div class="icon"><span class="fas fa-utensils"></span>
+                           </div>
+                           <div class="name">Comida</div>
+                        </div>
+                     </div>
+                     <div class="col col-d-3 col-t-3 col-m-6 border-line-v">
+                        <div class="fuct-item">
+                           <div class="icon"><span class="fab fa-avianex"></span></div>
+                           <div class="name">Viajando</div>
+                        </div>
+                     </div>
+                     <div class="clear"></div>
+                  </div>
+               </div>
+
+               <div class="content custom-text">
+                  <div class="title">Mais sobre mim</div>
+                  <div class="row border-line-v">
+                     <div class="col col-m-12 col-t-12 col-d-12">
+                        <div class="post-box single-post-text">
+                           <div class="blog-content">
+                              <p>
+                                 Um pouco mais sobre mim! Eu amo ouvir musica! Eu escuto uma variedade de músicas.
+                                 Eu também adoro jogar futebol! É um dos meus esportes favoritos.
+                                 Em termos de comida, gosto muito de comer e fazer! Eu tento o meu melhor para preparar
+                                 refeições para meus pais e para mim.
+                                 Para viajar, tive a sorte de poder viajar para muitos lugares e cidades do mundo!
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="content calendar">
+                  <div class="title">Calendar</div>
+                  <div class="row border-line-v">
+                     <div class="col col-m-12 col-t-12 col-d-12">
+                        <div class="custom-calendar-wrap">
+                           <div id="custom-inner" class="custom-inner">
+                              <div class="custom-header clearfix">
+                                 <nav> <span id="custom-prev" class="custom-prev"></span> <span id="custom-next"
+                                       class="custom-next"></span></nav>
+                                 <div id="custom-month" class="custom-month"></div>
+                                 <div id="custom-year" class="custom-year"></div>
+                              </div>
+                              <div id="calendar" class="fc-calendar-container"></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!---------------------------------------------------------------------->
+         <div class="card-inner" id="card-resume">
+            <div class="card-wrap">
+               <!--
+                  <div class="content resume">
+                     <div class="title">Currículo</div>
+                     <div class="row">
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                           <div class="resume-title border-line-h">
+                              <div class="icon"><i class="ion ion-briefcase"></i></div>
+                              <div class="name">Experiência</div>
+                           </div>
+                           <div class="resume-items">
+                              <div class="resume-item border-line-h active">
+                                 <div class="date">Oct. 2019 - Present</div>
+                                 <div class="name">Full stack developer</div>
+                                 <div class="company">Stackd</div>
+                                 <div class="single-post-text">
+                                    <p>Collaborated with the product and tech teams on the execution of Stackd, an LFG platform aiming to better represent women and underrepresented groups in eSports.</p>
+                                 </div>
+                              </div>
+                              <div class="resume-item border-line-h active">
+                                 <div class="date">Feb. 2019 - Present</div>
+                                 <div class="name">Technical mentor</div>
+                                 <div class="company">Canada Learning Code</div>
+                                 <div class="single-post-text">
+                                    <p>Volunteered as a mentor at various Canada Learning Code workshops hosted for kids, teens, and women. Taught technical skills and learned how to teach programming concepts to others.</p>
+                                 </div>
+                              </div>
+                              <div class="resume-item border-line-h active">
+                                 <div class="date">Sept. 2017 - Present</div>
+                                 <div class="name">Assistant coach</div>
+                                 <div class="company">NET Basketball</div>
+                                 <div class="single-post-text">
+                                    <p>Assisted the head coach in delivering drills and activities during practices. Refereeed, coached, and gave demonstrations during practices.</p>
+                                 </div>
+                              </div>
+                              <div class="resume-item border-line-h">
+                                 <div class="date">July 2018 - Aug. 2018</div>
+                                 <div class="name">Recreational program volunteer</div>
+                                 <div class="company">Ontario Science Center</div>
+                                 <div class="single-post-text">
+                                    <p>Supervised and monitored campers between the ages of 5 to 7 on a daily basis and encouraged positive behaviour. Communicated with the campers'parents and visitors of the Science Center.</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                           <div class="resume-title border-line-h">
+                              <div class="icon"><i class="ion ion-university"></i></div>
+                              <div class="name">EDUCATION</div>
+                           </div>
+                           <div class="resume-items">
+                              <div class="resume-item border-line-h active">
+                                 <div class="date">2017 - Present</div>
+                                 <div class="name">A.Y. Jackson Secondary School</div>
+                                 <div class="company">Toronto</div>
+                                 <div class="single-post-text">
+                                    <p>Currently pursuing an Ontario Secondary School Diploma (OSSD) at A.Y. Jackson. Currently in Grade 11</p><br>
+                                    <p>Clubs: Engineers without boarders, coding club, DECA, math club, and fitness club </p>
+                                 </div>
+                              </div>
+                              <div class="resume-item border-line-h ">
+                                 <div class="date">2019 - 2020</div>
+                                 <div class="name">CS50</div>
+                                 <div class="company">Harvard</div>
+                                 <div class="single-post-text">
+                                    <p>Coursework &#8211; Introductory course to computer science. Learned various computer science concepts and thought processes.</p>
+                                 </div>
+                              </div>
+                              <div class="resume-item border-line-h ">
+                                 <div class="date">2019 - 2020</div>
+                                 <div class="name">6.00x Python course</div>
+                                 <div class="company">MIT</div>
+                                 <div class="single-post-text">
+                                    <p>Introductory course to computer science using Python. Python syntax and programming knowledge and procedures were taught and learned.</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="clear"></div>
+                     </div>
+                  </div>-->
+               <div class="content skills">
+                  <div class="title">Minhas Habilidades</div>
+                  <div class="row">
+                     <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                        <div class="skills-list circles">
+                           <div class="skill-title border-line-h">
+                              <div class="icon"><i class="ion ion-code"></i></div>
+                              <div class="name">
+                                 CODIFICAÇÃO</div>
+                           </div>
+                           <ul>
+                              <li class="border-line-h">
+                                 <div class="name">Python</div>
+                                 <div class="progress p90">
+                                    <div class="percentage" style="width:90%;"></div>
+                                    <span>90%</span>
+                                 </div>
+                              </li>
+                              <li class="border-line-h">
+                                 <div class="name">Mobile Developer</div>
+                                 <div class="progress p85">
+                                    <div class="percentage" style="width:85%;"></div>
+                                    <span>85%</span>
+                                 </div>
+                              </li>
+                              <li class="border-line-h">
+                                 <div class="name">Java</div>
+                                 <div class="progress p75">
+                                    <div class="percentage" style="width:75%;"></div>
+                                    <span>75%</span>
+                                 </div>
+                              </li>
+                              <li class="border-line-h">
+                                 <div class="name">C / C# / C++</div>
+                                 <div class="progress p75">
+                                    <div class="percentage" style="width:75%;"></div>
+                                    <span>75%</span>
+                                 </div>
+                              </li>
+                              <li class="border-line-h">
+                                 <div class="name">Dart</div>
+                                 <div class="progress p65">
+                                    <div class="percentage" style="width:65%;"></div>
+                                    <span>65%</span>
+                                 </div>
+                              </li>
+                              <li class="border-line-h">
+                                 <div class="name">HTML / CSS / JavaScript</div>
+                                 <div class="progress p85">
+                                    <div class="percentage" style="width:80%;"></div>
+                                    <span>80%</span>
+                                 </div>
+                              </li>
+
+                           </ul>
+                        </div>
+                     </div>
+
+                     <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                        <div class="skills-list list">
+                           <div class="skill-title border-line-h">
+                              <div class="icon"><i class="ion ion-android-list"></i></div>
+                              <div class="name">
+                                 CONHECIMENTO</div>
+                           </div>
+                           <ul>
+                              <li class="border-line-h">
+                                 <div class="name">Programação</div>
+                                 <div class="progress ">
+                                    <div class="percentage" style="width:;"></div>
+                                 </div>
+                              </li>
+                              <li class="border-line-h">
+                                 <div class="name">Base de dados</div>
+                                 <div class="progress ">
+                                    <div class="percentage" style="width:;"></div>
+                                 </div>
+                              </li>
+                              <li class="border-line-h">
+                                 <div class="name">IOT</div>
+                                 <div class="progress ">
+                                    <div class="percentage" style="width:;"></div>
+                                 </div>
+                              </li>
+                              <li class="border-line-h">
+                                 <div class="name">WordPress</div>
+                                 <div class="progress ">
+                                    <div class="percentage" style="width:;"></div>
+                                 </div>
+                              </li>
+                              <li class="border-line-h">
+                                 <div class="name">DevOps</div>
+                                 <div class="progress ">
+                                    <div class="percentage" style="width:;"></div>
+                                 </div>
+                              </li>
+                              <li class="border-line-h">
+                                 <div class="name">Programação Segurança</div>
+                                 <div class="progress ">
+                                    <div class="percentage" style="width:;"></div>
+                                 </div>
+                              </li>
+
+                              <li class="border-line-h">
+                                 <div class="name">Conceitos de ciência da computação</div>
+                                 <div class="progress ">
+                                    <div class="percentage" style="width:;"></div>
+                                 </div>
+                              </li>
+                              <li class="border-line-h">
+                                 <div class="name">Fundação matemática sólida</div>
+                                 <div class="progress ">
+                                    <div class="percentage" style="width:;"></div>
+                                 </div>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+
+                     <div class="clear"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         
+            <div class="card-inner" id="card-works">
+               <div class="card-wrap">
+                  <div class="content works">
+                     <div class="title ">Trabalhos Recentes</div>
+                     <div class="row grid-items border-line-v">
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-h grid-item f-photo ">
+                           <div class="box-item">
+                              <div class="image">
+                                 <a href="https://play.google.com/store/apps/details?id=pt.tbdb.bjtech&hl=en-US" target="blank">
+                                    <img width="400" height="400" src="https://play-lh.googleusercontent.com/oelpAso5Wi7b34udrS3hyhSL5hYpEXoe_ec9ZA8rVnQrk9S0UylH5_iSUTfWxULU1YL9=w240-h480-rw"> 
+                                 </a>
+                              </div>
+                              <div class="desc">
+                                 <a href="https://play.google.com/store/apps/details?id=pt.tbdb.bjtech&hl=en-US" target="blank" class="name">T B D B App</a>
+                                 <div class="category">The Biomimicry Database</div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-h grid-item f-video ">
+                           <div class="box-item">
+                              <div class="image">
+                                 <a href="https://thebiomimicrydb.vercel.app/" target="blank">
+                                    <img width="400" height="400" src="https://thebiomimicrydb.vercel.app/images/logo_ligth.png"> 
+                                 </a>
+                              </div>
+                              <div class="desc">
+                                 <a href="https://thebiomimicrydb.vercel.app/" target="blank" class="name">T B D B WebApi</a>
+                                 <div class="category">The Biomimicry Database</div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-h grid-item f-music ">
+                           <div class="box-item">
+                              <div class="image">
+                                 <a href="https://vagnerbomjesus.medium.com/workshops-de-semin%C3%A1rio-i-flutter-parte-1-ea8c62affe4d" target="blank" >
+                                    <img width="300" height="300" src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*ZZSB7atDtx_1kN9FC-aCOA.png"> 
+                                 </a>
+                              </div>
+                              <div class="desc">
+                                 <a href="https://github.com/VagnerBomJesus/workshop" target="blank" class="name">Workshops</a>
+                                 <div class="category">Seminários de Flutter</div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-h grid-item f-design ">
+                           <div class="box-item">
+                              <div class="image">
+                                 <a href="https://vagnerbomjesus.github.io/carlosanto_photography/page.html" target="blank">
+                                    <img width="600" height="500" src="https://vagnerbomjesus.github.io/carlosanto_photography/img/810_n.jpg"> 
+                                 </a>
+                              </div>
+                              <div class="desc">
+                                 <a href="https://vagnerbomjesus.github.io/carlosanto_photography/page.html" target="blank" class="name">Fotógrafo Profissional</a>
+                                 <div class="category">Carlos Santo</div>
+                              </div>
+                              <div id="popup-44" class="popup-box mfp-fade mfp-hide">
+                                 <div class="content">
+                                    <div class="preloader-popup">
+                                       <div class="centrize full-width">
+                                          <div class="vertical-center">
+                                             <div class="spinner default-circle"></div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-h grid-item f-photo ">
+                           <div class="box-item">
+                              <div class="image">
+                                 <a href="https://vagnerbomjesus.github.io/DS_AGENCY/" target="blank">
+                                    <img width="600" height="700" src="https://vagnerbomjesus.github.io/DS_AGENCY/assets/img/galeria/logo1%20(2).jpg">
+                                 </a>
+                              </div>
+                              <div class="desc">
+                                 <a href="https://vagnerbomjesus.github.io/DS_AGENCY/" target="blank" class="name">Pagina Web</a>
+                                 <div class="category">DS AGENCY</div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-h grid-item f-photo ">
+                           <div class="box-item">
+                              <div class="image">
+                                 <a href="https://ieeexplore.ieee.org/document/10211974" target="blank">
+                                    <img width="600" height="700" src="./images/Airva.png">
+                                 </a>
+                              </div>
+                              <div class="desc">
+                                 <a href="https://ieeexplore.ieee.org/document/10211974" target="blank" class="name">Monitoramento da qualidade e ocupação do ar interno com um sistema IoT</a>
+                                 <div class="category">Avaliação em ambiente de sala de aula</div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="clear"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         <div class="card-inner" id="card-contacts">
+            <div class="card-wrap">
+               <div class="content contacts">
+                  <div class="title"><span class="first-word">Entre </span>em contato</div>
+                  <div class="row">
+                     
+                     <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
+                        <iframe
+                           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3032.015089273995!2d-7.283705185139705!3d40.54125577935083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd3ce53c0a6d5b53%3A0xcda0ebf5d4393bce!2sIPG!5e0!3m2!1spt-PT!2spt!4v1590084621155!5m2!1spt-PT!2spt"
+                           width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                           aria-hidden="false" tabindex="0"></iframe>
+                           <br>
+                           <br> 
+                           <br>
+                           <br> 
+                        <div class="info-list">
+                            <ul>
+                              <li> <strong>ENDEREÇO:</strong> Guarda, Portugal </li>
+                              <li> </li>
+                              <li> </li>
+                              <li> <strong>Email: </strong> vagneripg@gmail.com</li>
+                              <li> </li>
+                              <li> </li>
+                              <li> <strong>TELEFONE:</strong> +351 933077024</li>
+
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="clear"></div>
+                  </div>
+               </div>
+               <div class="content contacts">
+                  <div class="title"><span class="first-word">Formulário</span> de contato</div>
+                  <div class="row">
+                     <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
+                        <div class="contact_form">
+                           <div role="form" class="wpcf7" id="wpcf7-f8-o1" lang="en-US" dir="ltr">
+                              <div class="screen-reader-response"></div>
+                              <form action="/v4/#wpcf7-f8-o1" method="post" class="wpcf7-form" novalidate="novalidate">
+                                 <div style="display: none;"> <input type="hidden" name="_wpcf7" value="8"> <input
+                                       type="hidden" name="_wpcf7_version" value="5.1.6"> <input type="hidden"
+                                       name="_wpcf7_locale" value="en_US"> <input type="hidden" name="_wpcf7_unit_tag"
+                                       value="wpcf7-f8-o1"> <input type="hidden" name="_wpcf7_container_post" value="0">
+                                 </div>
+                                 <div class="row">
+                                    <div class="col col-d-6 col-t-6 col-m-12">
+                                       <div class="group-val"> <span class="wpcf7-form-control-wrap your-name"><input
+                                                type="text" name="your-name" value="" size="40"
+                                                class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
+                                                aria-required="true" aria-invalid="false"
+                                                placeholder="Nome completo"></span></div>
+                                    </div>
+                                    <div class="col col-d-6 col-t-6 col-m-12">
+                                       <div class="group-val"> <span class="wpcf7-form-control-wrap your-email"><input
+                                                type="email" name="your-email" value="" size="40"
+                                                class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email"
+                                                aria-required="true" aria-invalid="false"
+                                                placeholder="Endereço de e-mail"></span></div>
+                                    </div>
+                                    <div class="col col-d-12 col-t-12 col-m-12">
+                                       <div class="group-val"> <span
+                                             class="wpcf7-form-control-wrap your-message"><textarea name="your-message"
+                                                cols="40" rows="10"
+                                                class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required"
+                                                aria-required="true" aria-invalid="false"
+                                                placeholder="Sua Mensagem"></textarea></span></div>
+                                    </div>
+                                 </div>
+                                 <div class="align-left">
+                                    
+                                    <button type="submit" class="button" onclick="enviarMensagem()">
+                                       <span class="text">
+                                          ENVIAR MENSAGEM
+                                       </span>
+                                       
+                                       <span class="arrow"></span>
+                                    </button>
+                                 </div>
+                                 <div class="wpcf7-response-output wpcf7-display-none"></div>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="clear"></div>
+
+                     
+                  </div>
+               </div>
+            </div>
+         </div>
+
+
+
+
+      </div>
+   </div>
+   </div>
+   <noscript>
+      <style>
+         .lazyload {
+            display: none;
+         }
+         .error-message {
+            background-color: #f44336;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .alert-danger {
+            background-color: #f44336;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .alert-success {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+      </style>
+   </noscript>
+  
+   <script>
+      function enviarMensagem() {
+        // Exemplo de validação - considere a mensagem de erro
+          // Altere para false para simular um erro
+          alert("Esta funcionalidade não está disponível no momento!");       
+    }
+
+    
+  </script>
+   <script
+      data-noptimize="1">window.lazySizesConfig = window.lazySizesConfig || {}; window.lazySizesConfig.loadMode = 1;</script>
+   <script async data-noptimize="1" src="js/lazysizes.min.js"></script>
+   <script type="text/javascript" src="js/js.js"></script>
+   <script defer src="js/autoptimize_cc0c822cc517bf50178559233ca9b86d.js"></script>
 
 </body>
 
